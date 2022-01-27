@@ -26,34 +26,39 @@
             </div>
         </header>
 
-        <form id="form" action="">
-            <div class="coontent">
-                <div id="content">
-                    <h1 id="titule">INGRESA TU VIDEO JUEGO PREFERIDO</h1>
-                    <div class="row g-3">
-                        <label for="">URL:</label>
-                        <input id="url" class="form-control" type="text" placeholder="Agregar URL Imagen"
-                            aria-label="default input example">
-                        <label for="">Nombre:</label>
-                        <input id="name" class="form-control" type="text" placeholder="Ingresa Nombre"
-                            aria-label="default input example">
+        <div id="form" action="">
+            <div id="content">
+                <h1 id="titule">INGRESA TU VIDEO JUEGO PREFERIDO</h1>
+                <form class="form-group">
+                    <input id="inputUrl" type="text" class="form-control " placeholder="Url imagen" name="url"
+                        required />
 
-                        <label for="">TIPO:</label>
-                        <input id="tipo" class="form-control" type="text" placeholder="Ingresa Tipo"
-                            aria-label="default input example">
+                    <input id="inputNombre" type="text" class="form-control mt-2" name="nombre" autoComplete="off"
+                        placeholder="Nombre" required />
 
-                        <label for="">AÑO:</label>
-                        <input id="año" class="form-control" type="text" placeholder="Ingresa Año"
-                            aria-label="default input example">
-                        <input id="inputId" class="form-control" type="text" placeholder=""
-                            aria-label="default input example">
-                        <a class="btn btn-primary" type="submit" role="button" aria-disabled="true">GUARDAR DATOS</a>
-                        <button id="consultar" type="button" class="btn btn-outline-success">CONSULTAR</button>
-                        <button id="modificar" type="button" class="btn btn-outline-secondary">MODIFICAR</button>
+                    <input id="inputTipo" type="text" class="form-control mt-2" placeholder="Ingresa Tipo"
+                    aria-label="default input example" required />
+
+                    <input id="inputAño" type="text" class="form-control mt-2" placeholder="Ingresa Año"
+                    aria-label="default input example" required />
+
+                    <input id="inputId" type="text" class="form-control mt-2" name="id" autoComplete="off" />
+
+                    <div class="d-grid gap-2 mx-auto mt-2">
+                        <button type="submit" class="btn btn-dark">
+                            Guardar
+                        </button>
+                        <button id="btnConsulta" type="button" class="btn btn-dark">
+                            Consultar Nombre Juego
+                        </button>
+                        <button id="btnModificar" type="button" class="btn btn-dark">
+                            Modificar
+                        </button>
                     </div>
+                </form>
                 </div>
             </div>
-        </form>
+        </div>
         <div id="card">
             <div class="row">
 

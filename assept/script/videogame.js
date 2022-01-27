@@ -1,27 +1,6 @@
 import { url as link } from "./url.js";
 
 const card = document.querySelector(".row");
-const form = document.getElementById("form");
-const consultar = document.getElementById("consultar");
-const modificar = document.getElementById("modificar");
-
-const capturarDatos = () => {
-    const url = document.getElementById("url").value;
-    const nombre = document.getElementById("name").value;
-    const tipo = document.getElementById("tipo").value;
-    const año = document.getElementById("año").value;
-    
-    console.log(url, nombre, tipo, año)
-    const videogame = {
-        url,
-        nombre,
-        tipo,
-        año
-    };
-
-    return videogame;
-
-};
 
 const pintarDatos = async () => {
 
@@ -32,13 +11,12 @@ const pintarDatos = async () => {
         const { id, url, name, tipo, año } = element;
 
         card.innerHTML += `
-        <div class="col-sm-6">
+        <div class="col-sm-4">
         <div class="card">
             <img src="${url}" class="card-img-top" alt="...">
             <div class="card-body">
-                <h5 class="card-title">${name}</h5>
-                <p class="card-text">${tipo}</p>
-                <p class="card-text"><small class="text-muted">${año}</small></p>
+                <h2 class="card-title">${name}</h2>
+                <p class="card-text">TIPO: ${tipo}, AÑO: ${año}</p>
                 <button class="btn btn-danger" id="${id}">Eliminar</button>
             </div>
         </div>
@@ -47,72 +25,82 @@ const pintarDatos = async () => {
     });
 };
 document.addEventListener('DOMContentLoaded', pintarDatos);
-
-
-form.addEventListener("submit", async (e) => {
-    const obj = capturarDatos();
-
-    await fetch(link, {
-        method: "POST",
-        body: JSON.stringify(obj),
-        headers: {
-           "Content-Type": "application/json; charset=utf-8",
-        },
-    });
-});
-
-card.addEventListener("click", async (e) => {
-    const eliminar = e.target.classList.contains("btn-danger");
-
-    if(eliminar){
+card.addEventListener('click', async (e) => {
+    const btnEliminar = e.target.classList.contains('btn-danger');
+    if (btnEliminar === true) {
         const id = e.target.id;
         await fetch(link + id, {
-         method: "DELETE",
-      });
+            method: 'DELETE'
+        })
     }
 });
 
-consultar.addEventListener("click", async (e) => {
-    const input = document.getElementById("name").value;
+const capturarDato = () => {
+    const url = document.getElementById("inputUrl").value;
+    const name = document.getElementById("inputNombre").value;
+    const tipo = document.getElementById("inputTipo").value;
+    const año = document.getElementById("inputAño").value;
+    const data = {
+        url,
+        name,
+        tipo,
+        año
+    }
+    return data
+};
+const form = document.querySelector(".form-group");
 
-    const res = await fetch(link);
-    const data = await res.json();
+form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const objeto = capturarDato();
+    console.log(objeto)
+    await fetch(link, {
+        method: 'POST',
+        body: JSON.stringify(objeto),
+        headers: {
+            "Content-Type": "application/json; charset=utf-8"
+        }
+    })
 
-    const buscado = data.find((e) => e.nombre.toLocaleLowerCase() === input.toLocaleLowerCase());
+});
+const btnnombre = document.getElementById('btnConsulta');
 
+btnnombre.addEventListener('click', async () => {
+
+    const input = document.getElementById('inputNombre').value;
+    const resp = await fetch(link);
+    const lista = await resp.json()
+    const buscado = lista.find(u => u.name.toLocaleLowerCase() === input.toLocaleLowerCase())
     if (buscado !== undefined) {
-        const { id, url, nombre, tipo, año } = buscado;
-  
-        document.getElementById("url").value = url;
-        document.getElementById("name").value = nombre;
-        document.getElementById("tipo").value = tipo;
-        document.getElementById("año").value = año;
-     } else {
-        alert("No encontrado");
-     }
-});
-
-modificar.addEventListener("click", async (e) => {
-    const datosModificar = capturarDatos();
-
-    const {url, nombre, tipo, año} = datosModificar;
-
-    if (url==="", nombre==="", tipo==="", año==="") {
-        alert("Llenar todos los campos");
-    }else{
-
-        const id = document.getElementById("id").value;
-
-        await fetch(url + id, {
-            method: "PUT",
-            body: JSON.stringify(datosModificar),
-            headers: {
-               "Content-Type": "application/json; charset=utf-8",
-            },
-         });
+        const { id, año, tipo } = buscado;
+        document.getElementById('inputUrl').value = buscado.url;
+        document.getElementById('inputAño').value = año;
+        document.getElementById('inputTipo').value = tipo;
+        document.getElementById('inputId').value = id;
+    } else {
+        alert('Correo no encontrado')
     }
+});
+const btnModificar = document.getElementById('btnModificar');
+
+btnModificar.addEventListener('click', async () => {
+
+    const dataMod = capturarDato();
+    const {url, name, tipo, año} = dataMod;
+   
+    if(url === "",name === "",tipo === "",año === ""){
+        alert('Llenar todos los campos')
+    }
+    else{
+        const id = document.getElementById('inputId').value;
+        console.log(dataMod)
+        await fetch(link + id, {
+            method: 'PUT',
+            body: JSON.stringify(dataMod),
+            headers: {
+                "Content-Type": "application/json; charset=utf-8"
+            }
+        })
+    }
+
 })
-
-
-
-
