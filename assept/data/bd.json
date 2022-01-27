@@ -1,0 +1,39 @@
+{
+    "videoGamer": [
+        {
+            "id": 1,
+            "url": "https://static.wikia.nocookie.net/esgta/images/1/1b/Car%C3%A1tula_GTA_V.jpg/",
+            "name": "GTA V",
+            "tipo": "Acción",
+            "año": "2019"
+        },
+        {
+            "id": 2,
+            "url": "https://esports.as.com/2018/07/24/battle-royale/primer-ano-Fortnite-numeros_1156994292_95690_1440x600.jpg",
+            "name": "Fortnite",
+            "tipo": "Acción",
+            "año": "2016" 
+        },
+        {
+            "id": 3,
+            "url": "https://images-na.ssl-images-amazon.com/images/I/61R+rBBQxaL._SY498_BO1,204,203,200_.jpg",
+            "name": "Legend of Zelda",
+            "tipo": "Aventura",
+            "año": "1986"
+        },
+        {
+            "id": 4,
+            "url": "https://www.latercera.com/resizer/p4Z_kaeSlvRmbG-LvxPPU6ujzn4=/900x600/smart/cloudfront-us-east-1.images.arcpublishing.com/copesa/2CBAYAX55ZBJ7I6OYET2ATWZLY.jpg",
+            "name": "Mario Kart",
+            "tipo": "Carreras",
+            "año": "1992"
+        },
+        {
+            "id": 5,
+            "url": "https://i.blogs.es/cbd88d/cyberpunk2077/1366_2000.jpg",
+            "name": "Cyberpunk 2077",
+            "tipo": "Ciencia ficción",
+            "año": "2020"
+        }
+    ]
+}
